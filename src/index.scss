@@ -1,0 +1,12 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:global(#app) {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  position: relative;
+}

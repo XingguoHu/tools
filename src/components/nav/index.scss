@@ -1,0 +1,155 @@
+$lefNavWidth: 60%;
+$animationTime: .3s;
+$animationFn: ease;
+
+@svg 1px-border {
+  width: 4px;
+  height: 4px;
+
+  @rect {
+    fill: transparent; // content为透明
+    width: 100%; // 宽度为4px * 100%
+    height: 100%; // 高度为4px * 100%
+    stroke-width: 25%; // 边框宽度 4px * 25%(即1px)
+    stroke: var(--color, black); // 颜色
+  }
+}
+
+.nav {
+  @at-root #{&}__top {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    width: 100%;
+    display: flex;
+    padding: 0 15px;
+    align-items: center;
+    height: 110px;
+    background-color: #2196f3;
+    box-shadow: 0 4px 8px -2px rgba(0, 0, 0, .2),
+      0 8px 10px 0 rgba(0, 0, 0, .14),
+      0 2px 20px 0 rgba(0, 0, 0, .12);
+
+    img {
+      width: 50px;
+    }
+  }
+
+  @at-root #{&}__left {
+    z-index: 2;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    transform: translateZ(0);
+    background: #00000059;
+
+
+    @at-root #{&}__animation {
+      @at-root #{&}--hide {
+        background: transparent;
+        animation: navBackHide $animationTime $animationFn;
+
+        @keyframes navBackHide {
+          from {
+            background: #00000059;
+          }
+
+          to {
+            background: transparent
+          }
+        }
+      }
+
+      @at-root #{&}--show {
+        animation: navBackShow $animationTime $animationFn;
+        background: #00000059;
+
+        @keyframes navBackShow {
+          from {
+            background: transparent;
+          }
+
+          to {
+            background: #00000059;
+          }
+        }
+      }
+    }
+
+    @at-root #{&}__content {
+      background: #ffffff;
+      width: $lefNavWidth;
+      height: 100%;
+      position: absolute;
+      transition: left $animationTime $animationFn;
+      transform: translateZ(0);
+      border-radius: 0 4px 4px 0;
+
+      @at-root #{&}--hide {
+        left: -$lefNavWidth;
+      }
+
+      @at-root #{&}--show {
+        left: 0
+      }
+    }
+  }
+
+  @at-root #{&}__title {
+    display: flex;
+    flex-direction: column;
+    padding: 14px 28px;
+    height: 110px;
+    justify-content: space-between;
+    border-bottom: 1px solid transparent;
+    border-image: svg(1px-border param(--color #999999)) 1 stretch;
+
+    h1 {
+      font-size: 48px;
+      color: rgba(0, 0, 0, .54);
+      font-weight: 500;
+      line-height: 1em;
+    }
+
+    span {
+      font-size: 24px;
+      cursor: pointer;
+      line-height: 1em;
+      color: rgba(0, 0, 0, .54);
+      font-weight: 600;
+    }
+  }
+
+  @at-root #{&}__menu-list {
+    padding-top: 10px;
+
+    h2 {
+      color: rgba(0, 0, 0, .87);
+      height: 60px;
+      line-height: 60px;
+      font-size: 32px;
+      font-weight: 500;
+      padding: 0 28px;
+    }
+
+    ul {
+      padding: 0 60px;
+    }
+
+    li {
+      transition: all .45s cubic-bezier(.23, 1, .32, 1);
+      overflow: hidden;
+      line-height: 60px;
+      color: rgba(0, 0, 0, .87);
+    }
+
+    .close {
+      height: 0;
+    }
+
+    .open {
+      height: 60px;
+    }
+  }
+}
