@@ -4,17 +4,16 @@
  * @export default
  * @param {string} url
  * @param {string} method // GET, POST, PUT, DELETE, etc.
- * @param {requstParams} params
+ * @param {RequstParams} params
  * @returns {Promise<any>}
  */
 
-const global: any = window;
-const origin = `${global.location.origin}/api`;
+const origin = `/api`;
 
 export default async function(
   url: string,
   method: string,
-  params: requstParams = {}
+  params: RequstParams = {}
 ): Promise<any> {
   const { body, query } = params;
   const type = typeof query;

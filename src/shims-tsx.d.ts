@@ -10,8 +10,13 @@ declare global {
       [elem: string]: any;
     }
   }
-  interface requstParams {
-    query?: any; //object
+
+  interface RequstParams {
+    query?: any; // object
     body?: object;
+  }
+
+  interface Window {
+    __INITIAL_STATE__: any;
   }
 }

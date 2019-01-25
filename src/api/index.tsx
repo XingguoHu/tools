@@ -1,6 +1,6 @@
 import request from "../utils/request";
 
-export async function getIpInfo(params: requstParams): Promise<any> {
+export async function getIpInfo(params: RequstParams): Promise<any> {
   return {
     ip: "27.193.13.255",
     country: "中国",

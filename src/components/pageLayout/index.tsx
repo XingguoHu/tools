@@ -12,19 +12,20 @@ import style from "./index.scss";
 export default class PageLayout extends Vue {
   // props
   @Prop(Boolean) private nav!: boolean;
-  @Prop(Function) private renderProps!: () => VNode;
   @Prop(Array) private menuList!: any[];
 
   private render(h: CreateElement): VNode {
-    const { nav, menuList, renderProps } = this;
-    let content: any = null;
+    const {
+      nav,
+      menuList,
+      $slots: { default: slot }
+    } = this;
 
-    content = (
+    return (
       <div class={style.pageLayout}>
         {nav && <m-nav menuList={menuList} />}
-        {renderProps()}
+        {slot}
       </div>
     );
-    return <div>{content}</div>;
   }
 }

@@ -4,7 +4,7 @@ declare module "vue/types/vue" {
     $request: (
       url: string,
       method: string,
-      params?: requstParams
+      params?: RequstParams
     ) => Promise<any>;
   }
 }

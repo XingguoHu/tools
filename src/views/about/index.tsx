@@ -10,25 +10,14 @@ const componentParams: object = {};
  */
 @Component(componentParams)
 export default class About extends Vue {
-  // props
-  @Prop({
-    type: Array,
-    default: () => []
-  })
-  private menuList!: any[];
-
   private render(h: CreateElement): VNode {
-    const { menuList } = this;
-
-    const renderContent = () => {
-      return <div>about me</div>;
-    };
-
     return (
-      <m-page-layout
-        nav={true}
-        menuList={menuList}
-        renderProps={renderContent}
+      <m-nav-list-provider
+        children={dataSource => (
+          <m-page-layout nav={true} menuList={dataSource}>
+            <div>about me</div>
+          </m-page-layout>
+        )}
       />
     );
   }

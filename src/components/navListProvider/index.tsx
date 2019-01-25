@@ -1,14 +1,17 @@
 import { VNode, CreateElement } from "vue";
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue, Prop } from "vue-property-decorator";
 
 /**
  *
  * @export
- * @class App
+ * @class NavListProvider
  * @extends {Vue}
  */
 @Component
-export default class App extends Vue {
+export default class NavListProvider extends Vue {
+  // props
+  @Prop(Function) private children!: (data) => VNode;
+
   // state
   private menuList: any[] = [
     // {
@@ -30,14 +33,7 @@ export default class App extends Vue {
   ];
 
   private render(h: CreateElement): VNode {
-    const {
-      menuList,
-      $route: { path }
-    } = this;
-    return (
-      <div id="app">
-        <router-view key={path} menuList={menuList} />
-      </div>
-    );
+    const { children, menuList } = this;
+    return <div>{children(menuList)}</div>;
   }
 }

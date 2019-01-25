@@ -10,26 +10,19 @@ import { Component, Vue, Prop } from "vue-property-decorator";
 export default class Home extends Vue {
   // state
   private data: any = [
-    {
-      routeName: "home",
-      label: "单位转换"
-    },
+    // {
+    //   routeName: "home",
+    //   label: "单位转换"
+    // },
     {
       routeName: "toolsIp",
-      label: "IP地址"
-    },
-    {
-      routeName: "about",
-      label: "中文电码查询"
+      label: "IP地址查询"
     }
+    // {
+    //   routeName: "about",
+    //   label: "中文电码查询"
+    // }
   ];
-
-  // props
-  @Prop({
-    type: Array,
-    default: () => []
-  })
-  private menuList!: any[];
 
   private handleClick(e) {
     const {
@@ -43,21 +36,19 @@ export default class Home extends Vue {
   }
 
   private render(h: CreateElement): VNode {
-    const { menuList, data, handleClick } = this;
-    const renderContent = () => {
-      const list = data.map((item, index) => {
-        const { label } = item;
-        return <div data-id={index}>{label}</div>;
-      });
-
-      return <div onClick={handleClick}>{list}</div>;
-    };
+    const { data, handleClick } = this;
+    const list = data.map((item, index) => {
+      const { label } = item;
+      return <div data-id={index}>{label}</div>;
+    });
 
     return (
-      <m-page-layout
-        nav={true}
-        menuList={menuList}
-        renderProps={renderContent}
+      <m-nav-list-provider
+        children={dataSource => (
+          <m-page-layout nav={true} menuList={dataSource}>
+            <div onClick={handleClick}>{list}</div>
+          </m-page-layout>
+        )}
       />
     );
   }

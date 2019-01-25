@@ -4,11 +4,15 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
+    "build": "vue-cli-service build",
+    "build:ssr": "vue-cli-service build --mode ssr --dest dist-ssr",
+    "ssr-serve": "node ssr",
+    "pressr-serve": "yarn build && yarn build:ssr",
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "express": "^4.16.4",
     "normalize.css": "^8.0.0",
     "postcss-import": "^12.0.1",
     "postcss-url": "^8.0.0",
@@ -19,7 +23,9 @@
     "vue": "^2.5.17",
     "vue-class-component": "^6.0.0",
     "vue-property-decorator": "^7.0.0",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "vue-server-renderer": "^2.5.22",
+    "vuex": "^3.1.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.1",
@@ -28,6 +34,7 @@
     "cssnano": "^4.1.7",
     "cssnano-preset-advanced": "^4.0.5",
     "cz-conventional-changelog": "^2.1.0",
+    "html-webpack-plugin": "^3.2.0",
     "lint-staged": "^7.2.2",
     "node-sass": "^4.9.0",
     "postcss-aspect-ratio-mini": "^0.0.2",
@@ -37,7 +44,8 @@
     "postcss-write-svg": "^3.0.1",
     "sass-loader": "^7.0.1",
     "typescript": "^3.0.0",
-    "vue-template-compiler": "^2.5.17"
+    "vue-template-compiler": "2.5.22",
+    "webpack-node-externals": "^1.7.2"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
